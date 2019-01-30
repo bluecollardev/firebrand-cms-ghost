@@ -1,3 +1,9 @@
+const _ = require('lodash');
+// TODO: Move this out!
+const FIREBRAND_CMS_TEMPLATES = {
+    DEFAULT: require('../config/template/page.config.json')
+};
+
 const debug = require('ghost-ignition').debug('services:routing:helpers:renderer'),
     setContext = require('./context'),
     templates = require('./templates');
@@ -18,6 +24,7 @@ module.exports = function renderer(req, res, data) {
             res.type(res.routerOptions.contentType);
         }
     }
-
+    
+    _.merge(data, FIREBRAND_CMS_TEMPLATES.DEFAULT);
     res.render(res._template, data);
 };

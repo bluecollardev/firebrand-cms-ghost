@@ -36,6 +36,9 @@ coreHelpers.tags = require('./tags');
 coreHelpers.title = require('./title');
 coreHelpers.twitter_url = require('./twitter_url');
 coreHelpers.url = require('./url');
+// TODO: Lucas these custom helpers need to automatically be injected into code
+// Firebrand CMS custom helpers
+coreHelpers.template_config = require('./template_config');
 
 registerAllCoreHelpers = function registerAllCoreHelpers() {
     // Register theme helpers
@@ -73,6 +76,9 @@ registerAllCoreHelpers = function registerAllCoreHelpers() {
     registerAsyncThemeHelper('next_post', coreHelpers.next_post);
     registerAsyncThemeHelper('prev_post', coreHelpers.prev_post);
     registerAsyncThemeHelper('get', coreHelpers.get);
+    
+    // Firebrand CMS helpers
+    registerThemeHelper('template_config', coreHelpers.template_config);
 };
 
 module.exports = coreHelpers;
