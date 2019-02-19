@@ -1,0 +1,97 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+<div class="center">
+
+  <!-- Start Fullpage Hero -->
+  <figure class="ampstart-image-fullpage-hero m0 relative mb4">
+    <amp-img width="404" height="720" alt="Welcome to Chapman &amp; Doan Edmonton Real Estate Appraisal" layout="responsive" src="./img/themes_2/hero.jpg" media="(max-width: 415px)"></amp-img>
+    <amp-img height="720" alt="Welcome to Chapman &amp; Doan Edmonton Real Estate Appraisal" layout="fixed-height" src="./img/themes_2/hero.jpg" media="(min-width: 416px)"></amp-img>
+    <figcaption class="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center">
+      <header class="p3">
+        <h1 class="ampstart-fullpage-hero-heading mb3">
+          <span class="ampstart-fullpage-hero-heading-text">
+            <span class="h1 block bold caps my1">Chapman & Doan</span>
+            <hr />
+            <span class="h3 block caps">Edmonton Real Estate Appraisers</span>
+          </span>
+        </h1>
+      </header>
+
+      <footer class="absolute left-0 right-0 bottom-0 mb4">
+        <a class="ampstart-btn inline-block ampstart-fullpage-hero-cta h5 m3 text-decoration-none" href="/about-us">About Us</a>
+      </footer>
+    </figcaption>
+  </figure>
+  <!-- End Fullpage Hero -->
+</div>
+
+<main id="content" role="main">
+
+  <article class="px3">
+    <amp-image-lightbox id="lightbox" layout="nodisplay"></amp-image-lightbox>
+    <amp-carousel class="my2 mxn3" height="200" layout="fixed-height" type="carousel">
+      <amp-img src="./img/themes_2/agentpresentproperty.jpg" width="300" height="200" alt="Agent Presenting Property" on="tap:lightbox" role="button" tabindex="0"></amp-img>
+      <amp-img src="./img/themes_2/Edmonton-Aerial1.jpg" width="267" height="200" alt="Aerial View of Edmonton" on="tap:lightbox" role="button" tabindex="0"></amp-img>
+      <amp-img src="./img/themes_2/edmontondevelopment.PNG" width="300" height="200" alt="Edmonton Development" on="tap:lightbox" role="button" tabindex="0"></amp-img>
+      <amp-img src="./img/themes_2/hoss-appraisals-1.jpg" width="300" height="200" alt="Appraisals Stock Photo" on="tap:lightbox" role="button" tabindex="0"></amp-img>
+    </amp-carousel>
+    <div class="site-wrapper">
+      {{!-- All the main content gets inserted here, index, post, etc --}}
+      {{#post}}
+        <main id="site-main" class="site-main outer">
+          <div class="inner">
+
+            <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}">
+
+              <header class="post-full-header">
+                <h1 class="post-full-title">{{title}}</h1>
+              </header>
+
+              {{#if feature_image}}
+                <figure class="post-full-image">
+                  {{!-- This is a responsive image, it loads different sizes depending on device
+                  https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
+                  <img
+                    srcset="{{img_url feature_image size="s"}} 300w,
+                            {{img_url feature_image size="m"}} 600w,
+                            {{img_url feature_image size="l"}} 1000w,
+                            {{img_url feature_image size="xl"}} 2000w"
+                    sizes="(max-width: 800px) 400px,
+                            (max-width: 1170px) 700px,
+                            1400px"
+                    src="{{img_url feature_image size="xl"}}"
+                    alt="{{title}}"
+                  />
+                </figure>
+              {{/if}}
+
+              <section class="post-full-content">
+                <div class="post-content">
+                  {{content}}
+                </div>
+              </section>
+
+            </article>
+
+          </div>
+        </main>
+
+      {{/post}}
+    </div>
+  </article>
+
+</main>
+
+
+{{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
+{{#contentFor "scripts"}}
+  <script>
+    $(function() {
+      var $postContent = $(".post-full-content");
+      $postContent.fitVids();
+    });
+  </script>
+{{/contentFor}}

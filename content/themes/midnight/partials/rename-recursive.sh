@@ -1,0 +1,1 @@
+find . -exec rename 's|.snip.html|.hbs|' {} +
